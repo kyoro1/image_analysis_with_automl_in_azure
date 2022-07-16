@@ -3,6 +3,17 @@
 This repository provides sample codes, which enable you to learn how to use auto-ml image classification under Azure ML environment.
 
 
+# Prerequisites:
+
+```sh
+az extension add --name azure-cli-ml
+```
+
+
+
+
+
+
 
 
 
