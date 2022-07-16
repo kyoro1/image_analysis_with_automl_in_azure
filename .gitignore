@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# for private configuration
+*/config.ini
+
+# Azure ML temp files
+*.amlignore
+*.amltmp
+.ipynb_aml_checkpoints
