@@ -10,7 +10,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 - Prepare [Azure subscription](https://azure.microsoft.com/en-us/free/), and [AML workspace](https://docs.microsoft.com/en-us/azure/machine-learning/concept-workspace). You may find [the steps here](00.%20provisioning.ipynb).
 
 ## c.2 Annotate for images and prepare datasets in AML
-- With your owned image, execute data labelling with [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
+- With your images, execute data labelling with [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
     - [Export the labed dataset into Dataset in AML](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects#export-the-labels). It will be used in training afterwards.
 - Prepare `config.ini` under `/common` directory [with the instruction](./common/README.md)
 
@@ -24,7 +24,7 @@ This repository provides sample codes, which enable you to learn how to use auto
     - **`az` cli**[^1] in [00. provisioning](00.%20provisioning.ipynb)
         - You can find `az login` or `az login --use-device-code` with your preference.
     - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
-        - As usual authentication concept, you need two steps: `populate managed ID`, and `give access right to the populated ID`.
+        - As usual authentication concept, you need three steps: `populate managed ID`, `give access right to the populated ID`, and `retrieve AML workspace with the ID`
         - `Populate managed ID`:
             - In the sample impelementation, you set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration` in [10. AML_pipeline_train](./10.%20AML_pipeline_train.ipynb):
 
@@ -43,9 +43,9 @@ This repository provides sample codes, which enable you to learn how to use auto
                 ![System Assigned identity](./docs/images/managed_identity.png). 
 
         - `Give access rights to the populated ID`
-            - After generating the identity, you need to assign the appropriate rights like `READ`, or `WRITE`(IAM) in Azure AD like `Enterprise Application` setting. [This site](https://stackoverflow.com/questions/66806261/is-it-possible-to-assign-a-system-managed-identity-to-an-azure-ad-enterprise-app) can help your understanding. 
+            - After generating the identity, you need to assign the appropriate rights like `READ` or `WRITE`(IAM) in Azure AD like `Enterprise Application` setting. [This site](https://stackoverflow.com/questions/66806261/is-it-possible-to-assign-a-system-managed-identity-to-an-azure-ad-enterprise-app) can help your understanding. 
         
-        - `Retrieve AML workspace with the managed ID`
+        - `Retrieve AML workspace with the ID`
             - You can retrieve AML workspace as follows in [train.py](./train.py):
                 ```python
                 from azureml.core.authentication import MsiAuthentication
