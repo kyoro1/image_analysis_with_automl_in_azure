@@ -23,7 +23,7 @@ model_name=image_classification_automl
 
 `Azure` part: Basic Azure parameters
 
-| value           | description                    |
+| variable        | description                    |
 ------------------|--------------------------------|
 | subscription_id | Your subscription ID of Azure  |
 | resource_group  | Your resource group            |
@@ -31,14 +31,14 @@ model_name=image_classification_automl
 
 `data` part: Basic data parameters
 
-| value           | description                                                     |
+| variable        | description                                                     |
 ------------------|-----------------------------------------------------------------|
-| train_ratio     | If `0.8`, 80% image files for training, and others for testing. |
+| train_ratio     | If you specify `0.8`, 80% image files for training, and others for testing. |
 | dataset_name    | Your dataset name in AML workspace, which are exported after data labelling. |
 
 `AML` part: Used for populating AML resources
 
-| value          | description                                    |
+| variable          | description                                    |
 -----------------|-------------------------------------------------------------------|
 | cluster_name   | Name of computer cluster used in image classification.            |
 | vm_size        | Specify VM used in training of ML model[^1]                       |
