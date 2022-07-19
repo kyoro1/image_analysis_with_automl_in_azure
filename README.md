@@ -1,8 +1,8 @@
 # a. Overview
-This repository provides sample codes, which enable you to learn how to use auto-ml image classification (multi-label) under Azure ML environment.
+This repository provides sample codes, which enable you to learn how to use auto-ml image classification (multi-label) under Azure ML(AML) environment.
 
 # b. Prerequisites:
-- Azure subscription, and its Azure ML workspace
+- Azure subscription, and its AML workspace
 - Image files to be used
 
 # c. How to use
