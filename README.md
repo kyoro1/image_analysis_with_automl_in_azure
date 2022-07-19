@@ -64,11 +64,11 @@ This repository provides sample codes, which enable you to learn how to use auto
     - With GPU-instance in training with deep-learning model, we need specific VM series. In this repository, we pick up from `NC-6` series. Please make sure [the situation here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2#compute-to-run-experiment). Indeed, we can choose `NC`-series in [specific region](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines).
         ```python
         compute_config = AmlCompute.provisioning_configuration(
-            vm_size=vm_size,
+            vm_size=vm_size,      # Specify `NC-` series as computer cluster here
             idle_seconds_before_scaledown=600,
             min_nodes=0,
             max_nodes=4,
-            location=vm_location,
+            location=vm_location, # Make sure the location prepares the `vm_size`
             identity_type=managed_id,
         )
         ```
