@@ -25,8 +25,7 @@ This repository provides sample codes, which enable you to learn how to use auto
         - You can find `az login` or `az login --use-device-code` with your preference.
     - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
         - We can use managed identity to retrieve AML workspace in executing actual batch pipelines in training of deep learning. Please see [this page](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-compute-cluster?tabs=python#set-up-managed-identity). This repository shows an example for system assigned identity. 
-        - After generating the identity, [this site](https://stackoverflow.com/questions/66806261/is-it-possible-to-assign-a-system-managed-identity-to-an-azure-ad-enterprise-app) can help your understanding.
-        - Actual implementation is as follows in 
+        - After generating the identity, [this site](https://stackoverflow.com/questions/66806261/is-it-possible-to-assign-a-system-managed-identity-to-an-azure-ad-enterprise-app) can help your understanding. Actual implementation is as follows in [train.py](./train.py)
             ```python
             from azureml.core.authentication import MsiAuthentication
             ## Authentication with managed identity
@@ -36,7 +35,7 @@ This repository provides sample codes, which enable you to learn how to use auto
             ws = Workspace(subscription_id=subscription_id,
                             resource_group=resource_group,
                             workspace_name=workspace_name,
-                        auth=msi_auth)
+                            auth=msi_auth)
             ```
 
 ## d.2 selection of computer clusters
