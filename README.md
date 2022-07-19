@@ -10,7 +10,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 - Prepare [Azure subscription](https://azure.microsoft.com/en-us/free/), and [AML workspace](https://docs.microsoft.com/en-us/azure/machine-learning/concept-workspace). You may find [the steps here](00.%20provisioning.ipynb).
 
 ## c.2 Annotate for images and prepare datasets in AML
-- With your images, execute data labelling with [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
+- With your images, please start data labelling with [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
     - [Export the labed dataset into Dataset in AML](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects#export-the-labels). It will be used in training afterwards.
 - Prepare `config.ini` under `/common` directory [with the instruction](./common/README.md)
 
@@ -21,7 +21,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 # d. TIPS of the steps
 ## d.1 Authentication
 - As a preparation, you need to use AML workspace, and use two kinds of authentication
-    - **`az` cli**[^1] in [00. provisioning](00.%20provisioning.ipynb)
+    - **`az` cli**[^1] in [00. provisioning](00.%20provisioning.ipynb). Please check [the site](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli), if necessary.
         - You can find `az login` or `az login --use-device-code` with your preference.
     - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
         - As usual authentication concept, you need three steps: `populate managed ID`, `give access right to the populated ID`, and `retrieve AML workspace with the ID`
