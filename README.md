@@ -18,7 +18,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 - Once completing the prep in `c.2`, please populate pipelines for training deep learning model with Auto-ML image classification with basic model. You may find [the steps here](./10.%20AML_pipeline_train.ipynb)
     - We use AML pipeline as batch execution like deep learning training or inference with this repository. In order to do it, we need `train.py`, which will be embedded in the pipeline.
 
-# d. TIPS of the Notebook
+# d. TIPS of the steps
 ## d.1 Authentication
 - As a preparation, we need to use AML workspace, and use two kinds of authentication
     - **`az` cli**[^1] in [00. provisioning](00.%20provisioning.ipynb)
