@@ -6,7 +6,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 - Image files to be classified
 
 # c. How to use
-## c.1 Azure environment, and AML Workspace
+## c.1 Azure environment and AML Workspace
 - Prepare [Azure subscription](https://azure.microsoft.com/en-us/free/), and [AML workspace](https://docs.microsoft.com/en-us/azure/machine-learning/concept-workspace). You may find [the steps here](00.%20provisioning.ipynb).
 
 ## c.2 Annotate for images and prepare datasets in AML
@@ -16,17 +16,17 @@ This repository provides sample codes, which enable you to learn how to use auto
 
 ## c.3 Populate pipelines in AML
 - Once completing the prep in `c.2`, please populate pipelines for training deep learning model with Auto-ML image classification with basic model. You may find [the steps here](./10.%20AML_pipeline_train.ipynb)
-    - We use AML pipeline as batch execution like deep learning training or inference with this repository. In order to do it, we need `train.py`, which will be embedded in the pipeline.
+    - You use AML pipeline as batch execution like deep learning training or inference with this repository. In order to do it, you need `train.py`, which will be embedded in the pipeline.
 
 # d. TIPS of the steps
 ## d.1 Authentication
-- As a preparation, we need to use AML workspace, and use two kinds of authentication
+- As a preparation, you need to use AML workspace, and use two kinds of authentication
     - **`az` cli**[^1] in [00. provisioning](00.%20provisioning.ipynb)
         - You can find `az login` or `az login --use-device-code` with your preference.
     - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
-        - As usual authentication concept, we need two steps: `populate managed ID`, and `give access right to the populated ID`.
+        - As usual authentication concept, you need two steps: `populate managed ID`, and `give access right to the populated ID`.
         - `Populate managed ID`:
-            - In our sample impelementation, we set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration` in [10. AML_pipeline_train](./10.%20AML_pipeline_train.ipynb):
+            - In the sample impelementation, you set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration` in [10. AML_pipeline_train](./10.%20AML_pipeline_train.ipynb):
 
                 ```python
                 compute_config = AmlCompute.provisioning_configuration(
@@ -38,7 +38,7 @@ This repository provides sample codes, which enable you to learn how to use auto
                     identity_type=managed_id, ## Require `SystemAssigned` for System assigned managed ID here
                  )
                 ```
-                By setting as above, we can use managed identity to retrieve AML workspace in executing actual batch pipelines in training of deep learning. Please see [this page](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-compute-cluster?tabs=python#set-up-managed-identity). You may make sure the populated managed ID in red-rectangle as follows:
+                By setting as above, you can use `managed identity` to retrieve AML workspace in executing actual batch pipelines in training of deep learning. Please see [this page](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-compute-cluster?tabs=python#set-up-managed-identity). You may make sure the populated managed ID in red-rectangle as follows:
         
                 ![System Assigned identity](./docs/images/managed_identity.png). 
 
@@ -46,7 +46,7 @@ This repository provides sample codes, which enable you to learn how to use auto
             - After generating the identity, you need to assign the appropriate rights like `READ`, or `WRITE`(IAM) in Azure AD like `Enterprise Application` setting. [This site](https://stackoverflow.com/questions/66806261/is-it-possible-to-assign-a-system-managed-identity-to-an-azure-ad-enterprise-app) can help your understanding. 
         
         - `Retrieve AML workspace with the managed ID`
-            - We can retrieve AML workspace as follows in [train.py](./train.py):
+            - You can retrieve AML workspace as follows in [train.py](./train.py):
                 ```python
                 from azureml.core.authentication import MsiAuthentication
                 ## Authentication with managed identity
@@ -61,7 +61,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 
 ## d.2 Selection of computer clusters
 - GPU instance in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
-    - With GPU-instance in training with deep-learning model, we need specific VM series. In this repository, we pick up from `NC-6` series. Please make sure [the situation here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2#compute-to-run-experiment). Indeed, we can choose `NC`-series in [specific region](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines).
+    - With GPU-instance in training with deep-learning model, you need specific VM series. In this repository, you pick up from `NC-6` series. Please make sure [the situation here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2#compute-to-run-experiment). Indeed, you can choose `NC`-series in [specific region](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines).
         ```python
         compute_config = AmlCompute.provisioning_configuration(
             vm_size=vm_size,      # Specify `NC-` series as computer cluster here
