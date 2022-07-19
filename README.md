@@ -3,7 +3,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 
 # b. Prerequisites:
 - Azure subscription, and its AML workspace
-- Image files to be used
+- Image files to be classified
 
 # c. How to use
 ## c.1 Azure environment, and AML Workspace
