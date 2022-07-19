@@ -15,7 +15,7 @@ This repository provides sample codes, which enable you to learn how to use auto
 - Prepare `config.ini` under `/common` directory [with the instruction](./common/README.md)
 
 ## c.3 Populate pipelines in AML
-- Once completing the prep in `c.2`, please populate pipelines for training deep learning model with Auto-ML image classification with basic model. You may find [the steps here](./10.%20AML_pipeline_train.ipynb)
+- Once completing the prep in [c.2](#c2-annotate-for-images-and-prepare-datasets-in-aml), please populate pipelines for training deep learning model with Auto-ML image classification with [supported-model-algorithms](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=CLI-v2#supported-model-algorithms). You may find [the steps here](./10.%20AML_pipeline_train.ipynb)
     - You use AML pipeline as batch execution like deep learning training or inference with this repository. In order to do it, you need `train.py`, which will be embedded in the pipeline.
 
 # d. TIPS of the steps
