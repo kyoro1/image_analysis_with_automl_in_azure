@@ -1,5 +1,5 @@
 # a. Overview
-This repository provides sample codes, which enable you to learn how to use auto-ml image classification (multi-label) under Azure ML(AML) environment.
+This repository provides sample codes, which enable you to learn how to use auto-ml image classification, or object detection under Azure ML(AML) environment.
 
 # b. Prerequisites
 - Azure subscription, and its AML workspace
@@ -74,6 +74,9 @@ This repository provides sample codes, which enable you to learn how to use auto
         ```
 
 # e. Future tasks
+- [ ] Training process
+    - [ ] Object detection in `train.py`
+
 - [ ] Inference process
     - [ ] Retrieve the latest model
     - [ ] Predict with given images

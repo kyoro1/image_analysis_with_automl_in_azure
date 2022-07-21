@@ -1,5 +1,4 @@
 import argparse
-import configparser
 from azureml.core import Workspace, Experiment
 from azureml.core.authentication import MsiAuthentication
 from azureml.core import Dataset
@@ -12,6 +11,7 @@ from azureml.core.model import Model
 
 
 def populate_tabular_dataset(workspace, dataset, dataset_name, train_ratio, train_flg, seed):
+    print(f'Split dataset. Train:Test = {train_ratio}:{1-train_ratio}')
     if train_flg:
         tmp_dataset = dataset.random_split(percentage=train_ratio, seed=seed)[0] ## Train data
     else:
@@ -23,29 +23,34 @@ def populate_tabular_dataset(workspace, dataset, dataset_name, train_ratio, trai
 
 ## Arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("--base_model", help="base_model")
-parser.add_argument("--dataset_name", help="dataset_name")
-parser.add_argument("--train_ratio", help="train_ratio")
+parser.add_argument("--subscription_id", help="subscription id")
+parser.add_argument("--resource_group", help="resource group")
+parser.add_argument("--workspace_name", help="AML workspace")
+parser.add_argument("--cluster_name", help="cluster name")
+parser.add_argument("--experiment_name", help="experiment name")
+parser.add_argument("--base_model", help="base model")
+parser.add_argument("--dataset_name", help="dataset name")
+parser.add_argument("--dataset_name_for_train", help="dataset name for training")
+parser.add_argument("--dataset_name_for_test", help="dataset name for testing")
+parser.add_argument("--train_ratio", help="train ratio")
 parser.add_argument("--random_seed", help="random seed")
-parser.add_argument("--model_name", help="model_name")
+parser.add_argument("--model_name", help="model name")
+parser.add_argument("--image_analysis_type", help="image analysis type")
 
 args = parser.parse_args()
+subscription_id = args.subscription_id
+resource_group = args.resource_group
+workspace_name = args.workspace_name
+cluster_name = args.cluster_name
+experiment_name = args.experiment_name
 base_model = args.base_model
 dataset_name = args.dataset_name
+dataset_name_for_train = args.dataset_name_for_train
+dataset_name_for_test = args.dataset_name_for_test
 train_ratio = float(args.train_ratio)
 random_seed = int(args.random_seed)
 model_name = args.model_name
-
-## Setting
-config_ini = configparser.ConfigParser()
-config_ini.read('./common/config.ini', encoding='utf-8')
-
-subscription_id = config_ini.get('Azure', 'subscription_id')
-resource_group = config_ini.get('Azure', 'resource_group')
-workspace_name = config_ini.get('Azure', 'workspace_name')
-
-cluster_name = config_ini.get('AML', 'cluster_name')
-train_ratio = config_ini.get('AML', 'train_ratio')
+image_analysis_type = args.image_analysis_type
 
 ## Authentication with managed identity
 msi_auth = MsiAuthentication()
@@ -63,48 +68,53 @@ try:
 except:
     raise Exception(f"Compute {cluster_name} is not found in workspace {ws}.")
 
-## Retrieve experiment
-experiment_name = "automl-image-multiclass"
-experiment = Experiment(ws, name=experiment_name)
-
 ## dataset
 dataset = Dataset.get_by_name(ws, name=dataset_name)
 
 ## Train/Test split
 ds_train_dataset = populate_tabular_dataset(workspace=ws
                                         ,dataset=dataset
-                                        ,dataset_name='train_dataset'
+                                        ,dataset_name=dataset_name_for_train
                                         ,train_ratio=train_ratio
                                         ,train_flg=True
                                         ,seed=random_seed)
 
 ds_test_dataset = populate_tabular_dataset(workspace=ws
                                         ,dataset=dataset
-                                        ,dataset_name='test_dataset'
+                                        ,dataset_name=dataset_name_for_test
                                         ,train_ratio=train_ratio
                                         ,train_flg=False
                                         ,seed=random_seed)
 
 ## Define image classification task
-image_config = AutoMLImageConfig(
-    task=ImageTask.IMAGE_CLASSIFICATION,
-    compute_target=compute_target,
-    training_data=ds_train_dataset,
-    validation_data=ds_test_dataset,
-    hyperparameter_sampling=GridParameterSampling({"model_name": choice(base_model)}),
-    iterations=1,
-)
+task = None
+if image_analysis_type == 'image_classification':
+    task = ImageTask.IMAGE_CLASSIFICATION
+elif image_analysis_type == 'object_detection':
+    task = ImageTask.IMAGE_OBJECT_DETECTION
 
-## Execute actual training under remote environment
-automl_image_run = experiment.submit(image_config)
-automl_image_run.wait_for_completion(wait_post_processing=True)
+if task != None:
+    experiment = Experiment(ws, name=experiment_name)
+    image_config = AutoMLImageConfig(
+        task=task,
+        compute_target=compute_target,
+        training_data=ds_train_dataset,
+        validation_data=ds_test_dataset,
+        hyperparameter_sampling=GridParameterSampling({"model_name": choice(base_model)}),
+        iterations=1,
+    )
 
-## Post-process after completing the training
-best_child_run = automl_image_run.get_best_child()
-## Register ML model associated to AML workspace
-model = best_child_run.register_model(
-    model_name=model_name
-    ,model_path="outputs/model.pt"
-)
+    ## Execute actual training under remote environment
+    automl_image_run = experiment.submit(image_config)
+    automl_image_run.wait_for_completion(wait_post_processing=True)
+    ## Post-process after completing the training
+    best_child_run = automl_image_run.get_best_child()
+    ## Register ML model associated to AML workspace
+    model = best_child_run.register_model(
+        model_name=model_name
+        ,model_path="outputs/model.pt"
+    )
 
-print('Completely finished!')
+    print('Completely finished!')
+else:
+    print('Please check your setting.')

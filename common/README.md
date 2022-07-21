@@ -9,16 +9,30 @@ workspace_name=[YOUR AML WORKSPACE NAME]
 [data]
 train_ratio=0.8
 dataset_name=weather-classification_20220613_131039
+dataset_name_for_train=train_dataset
+dataset_name_for_test=test_dataset
 
 [AML]
+## general settings
 cluster_name=gpu-cluster-nc6
 vm_size=Standard_NC6
 vm_location=australiaeast
 managed_id=SystemAssigned
-base_model=vitb16r224
 random_seed=1
-pipelineName=image_classification_pipeline
-model_name=image_classification_automl
+
+## For Image Classification
+#image_analysis_type=image_classification
+#experiment_name=automl-image-multiclass
+#base_model=vitb16r224
+#pipelineName=image_classification_pipeline
+#model_name=image_classification_automl
+
+## For Object Detection
+#image_analysis_type=object_detection
+#experiment_name=automl-object-detection
+#base_model=yolov5
+#pipelineName=object_detection_pipeline
+#model_name=object_detection_automl_kyiwasak
 ```
 
 `Azure` part: Basic Azure parameters
@@ -31,23 +45,28 @@ model_name=image_classification_automl
 
 `data` part: Basic data parameters
 
-| variable        | description                                                     |
-------------------|-----------------------------------------------------------------|
-| train_ratio     | If you specify `0.8`, 80% image files for training, and others for testing. |
-| dataset_name    | Your dataset name in AML workspace, which are exported after data labelling. |
+| variable               | description                                                                  |
+-------------------------|------------------------------------------------------------------------------|
+| train_ratio            | If you specify `0.8`, 80% image files for training, and others for testing.  |
+| dataset_name           | Your dataset name in AML workspace, which are exported after data labelling. |
+| dataset_name_for_train | Subset of dataset for training process                                       |
+| dataset_name_for_test  | Subset of dataset for testing process                                        |
+
 
 `AML` part: Used for populating AML resources
 
-| variable          | description                                    |
------------------|-------------------------------------------------------------------|
-| cluster_name   | Name of computer cluster used in image classification.            |
-| vm_size        | Specify VM used in training of ML model[^1]                       |
-| vm_location    | Specify location of VM                                            |
-| managed_id     | This id is used for authenticating in training under AML pipeline |
-| base_model     | Base image classification model[^2]                               |
-| random_seed    | Used in splitting train/test data                                 |
-| pipelineName   | Name of AML pipeline                                              |
-| model_name     | Name of model, used both in training/inferencing.                 |
+| variable            | description                                                          |
+----------------------|----------------------------------------------------------------------|
+| cluster_name        | Name of computer cluster used in image classification.               |
+| vm_size             | Specify VM used in training of ML model[^1]                          |
+| vm_location         | Specify location of VM                                               |
+| managed_id          | This id is used for authenticating in training under AML pipeline    |
+| random_seed         | Used in splitting train/test data                                    |
+| image_analysis_type | Select analysis type from `image_classification`, `object_detection` |
+| experiment_name     | Experiment name, a group of jobs                                     |
+| base_model          | Base image classification model[^2]                                  |
+| pipelineName        | Name of AML pipeline                                                 |
+| model_name          | Name of model, used both in training/inferencing.                    |
 
 
 [^1]: Please specify NC-series or ND-series instead of NV-series
