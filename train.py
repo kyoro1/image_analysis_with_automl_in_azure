@@ -1,13 +1,11 @@
 import argparse
-from azureml.core import Workspace, Experiment
+from azureml.core import Workspace, Experiment, Dataset
 from azureml.core.authentication import MsiAuthentication
-from azureml.core import Dataset
 from azureml.core.compute import AmlCompute
 
 from azureml.automl.core.shared.constants import ImageTask
 from azureml.train.automl import AutoMLImageConfig
 from azureml.train.hyperdrive import GridParameterSampling, choice
-from azureml.core.model import Model
 
 
 def populate_tabular_dataset(workspace, dataset, dataset_name, train_ratio, train_flg, seed):

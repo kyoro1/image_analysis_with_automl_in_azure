@@ -73,19 +73,12 @@ This repository provides sample codes, which enable you to learn how to use auto
         )
         ```
 
-# e. Future tasks
-- [ ] Training process
-    - [ ] Object detection in `train.py`
-
-- [ ] Inference process
-    - [ ] Retrieve the latest model
-    - [ ] Predict with given images
-        - [ ] Convert the images into consumable format
-    - [ ] Output as csv or other formats
-
 
 # Reference
 - [Training an Image Classification Multi-Class model using AutoML](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-classification-multiclass/auto-ml-image-classification-multiclass.ipynb)
+- [Reference for multi label](https://github.com/Azure/azureml-examples/tree/main/python-sdk/tutorials/automl-with-azureml/image-classification-multilabel)
+- [Reference for object detection](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-object-detection/auto-ml-image-object-detection.ipynb)
 - [Announcing Automated ML (AutoML) for Images](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-automated-ml-automl-for-images/ba-p/2843034)
+
 
 [^1]: command line interface
