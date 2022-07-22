@@ -2,7 +2,7 @@
 This repository provides sample codes, which enable you to learn how to use auto-ml image classification, or object detection under Azure ML(AML) environment. 
 
 - Target users
-    - You want to **classify your photos** or **find objects from your photos**` with your customized deep-learning models.
+    - You want to **classify your photos** or **find objects from your photos** with your customized deep-learning models.
         - Please thihk about using [Custom Vision](https://www.customvision.ai/) for more simple development first.
     - You don't want to customize the algorithms for image analysis so much.
         - This repository aims at the second-best strategy for simplicity[^1], and [auto machine learning technology provided by Microsoft](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2) is mainly used.
@@ -23,7 +23,7 @@ __Disclaimer__
 # c. How to use
 For simplicity, this repository split training and inferring pipelines for each, and you can find that both environments are the same with respect to the AML environment perspective, i.e. both pipelines use the same `compute_target`, `environment` etc in AML.
 
-So, you can easily merge them by sorting out implemented Input/Output, if you prefer. These are conceptual steps for both processes:
+So, you can easily merge them by sorting out implementation of Input/Output, if you prefer. 
 
 
 ## c.1 Azure environment and AML Workspace
@@ -43,10 +43,10 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
 - As a preparation, you need to use AML workspace, and use two kinds of authentication
     - **`az` cli**[^2] in [00. provisioning](00.%20provisioning.ipynb). Please check [the site](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli), if necessary.
         - You can find `az login` or `az login --use-device-code` with your preference.
-    - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
+    - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb) and  [20. AML_pipeline_inference](./20.%20AML_pipeline_inferrence.ipynb)
         - As usual authentication concept, you need three steps: `populate managed ID`, `give access right to the populated ID`, and `retrieve AML workspace with the ID`
         - `Populate managed ID`:
-            - In the sample impelementation, you set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration` in [10. AML_pipeline_train](./10.%20AML_pipeline_train.ipynb) and [20. AML_pipeline_inference](./20.%20AML_pipeline_inferrence.ipynb):
+            - In the sample impelementation, you set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration`:
 
                 ```python
                 compute_config = AmlCompute.provisioning_configuration(
@@ -81,7 +81,7 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
 
 ## d.2 Selection of computer clusters
 - GPU instance in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb), and [20. AML-pipeline-inferrence](./20.%20AML_pipeline_inferrence.ipynb)
-    - With GPU-instance in training with deep-learning model, you need specific VM series. In this repository, you pick up from `NC-6` series. Please make sure [the situation here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2#compute-to-run-experiment). Indeed, you can choose `NC`-series in [specific region](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines).
+    - With GPU-instance in training with deep-learning model, you need specific VM series like `NC-6` instead of `NV-6`.[^3]
         ```python
         compute_config = AmlCompute.provisioning_configuration(
             vm_size=vm_size,      # Specify `NC-` series as computer cluster here
@@ -96,9 +96,9 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
 ## d.3 Populating python environment
 - You need to prepare python environment in executing the whole pipelines, and major functions to be delopped are as follows:
     - Ingest image files labelled by AML labelling tool
-    - training with those files under GPU-cluster, and fine-tune automatically
-    - Inferring with given image files and generated deep-learning models
-- In order to achieve under unified environment with `automl` in AML, this is a candidate for python environment setting[^3]. You can change by adding more python libraries with your preferences.[^4]
+    - train deep-learning model with those files under GPU-cluster, and fine-tune automatically
+    - Inferr with given image files and generated deep-learning models
+- In order to achieve under unified environment with `automl` in AML, this is a candidate for python environment setting[^4]. You can change by adding more python libraries with your preferences.[^5]
 
     ```python
     aml_run_config.environment.python.conda_dependencies = CondaDependencies.create(
@@ -127,5 +127,9 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
 [^1]: IF you're interested in more customized algorithms, please visit https://arxiv.org/list/cs.CV/recent
 
 [^2]: command line interface
-[^3]: as of July 2022
-[^4]: You can find `pandas`, `scikit-learn`, which are not used in this repository but are basic libraries to develop more functions. Please add more, if you need.
+
+[^3]: Please make sure [the situation here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2#compute-to-run-experiment). Indeed, you can choose `NC`-series in [specific region](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines).
+
+[^4]: as of July 2022
+
+[^5]: You can find `pandas`, `scikit-learn`, which are not used in this repository but are basic libraries to develop more functions. Please add more, if you need.
