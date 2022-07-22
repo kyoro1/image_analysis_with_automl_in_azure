@@ -29,8 +29,13 @@ So, you can easily merge them by sorting out implementation of Input/Output, if 
 - Prepare [Azure subscription](https://azure.microsoft.com/en-us/free/), and [AML workspace](https://docs.microsoft.com/en-us/azure/machine-learning/concept-workspace). You may find [the steps here](00.%20provisioning.ipynb).
 
 ## c.2 Annotate for images and prepare datasets in AML
-- With your images, please start data labelling with [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
+- Decide which image analysis will be satisfied with your demand between image classification or object detection.
+    - `image classification` is divided as two tasks: `multi-class` and `multi-label`.
+        - `multi-class`: We can select only one class for each image, and some class must be selected.
+        - `multi-label`: We can extract plural labels for each image, and none of the labels can be selected in some cases.
+- Start data labelling with your image files under [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
     - [Export the labed dataset into Dataset in AML](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects#export-the-labels). It will be used in training afterwards.
+    - 
 - Prepare `config.ini` under `/common` directory [with the instruction](./common/README.md)
 
 ## c.3 Populate pipelines in AML
