@@ -1,18 +1,17 @@
 # a. Overview
 This repository provides sample codes, which enable you to learn how to use auto-ml image classification, or object detection under Azure ML(AML) environment. 
 
-- Target users
-    - You want to **classify your photos** or **find objects from your photos** with your customized deep-learning models.
-        - Please thihk about using [Custom Vision](https://www.customvision.ai/) for more simple development first.
-    - You don't want to customize the algorithms for image analysis so much.
-        - This repository aims at the second-best strategy for simplicity[^1], and [auto machine learning technology provided by Microsoft](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2) is mainly used.
-    - You want to obtain the results from the deep-learning models **at batch**.
-        - Please find some contents in [references](#reference), if you're interested in real-time inference.
-
+__Target users__
+- You want to **classify your photos** or **find objects from your photos** with your customized deep-learning models.
+    - Please thihk about using [Custom Vision](https://www.customvision.ai/) for more simple development first.
+- You don't want to customize the algorithms for image analysis so much.
+    - This repository aims at the second-best strategy for simplicity[^1], and [auto machine learning technology provided by Microsoft](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2) is mainly used.
+- You want to obtain the inferred results with the deep-learning models **at batch**.
+    - Please find some contents in [references](#reference), if you're interested in real-time inference.
 
 __Disclaimer__ 
 - This repository aims at minimum system development with [some references](#reference). Major contents are quoted from them, and please check them if you're interested in more.
-- This repository was actually confirmed with some sample images as of July in 2022. Please use it for developping your application as your guideline.
+- This repository was actually confirmed with some sample images as of July in 2022. Please regard it as your guideline in developping your application.
 
 
 # b. Prerequisites
@@ -21,7 +20,7 @@ __Disclaimer__
     - You can find [1 image file](./sample_images/60_1537642922.jpg) for testing inferring pipeline.
 
 # c. How to use
-For simplicity, this repository split training and inferring pipelines for each, and you can find that both environments are the same with respect to the AML environment perspective, i.e. both pipelines use the same `compute_target`, `environment` etc in AML.
+This repository is divided into training and inferring pipeline, and you can find that both environments are the same with respect to the AML environment perspective, i.e. both pipelines use the same `compute_target`, `environment` etc in AML.
 
 So, you can easily merge them by sorting out implementation of Input/Output, if you prefer. 
 
