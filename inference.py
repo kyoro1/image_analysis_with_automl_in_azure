@@ -11,9 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--subscription_id", help="subscription id")
 parser.add_argument("--resource_group", help="resource group")
 parser.add_argument("--workspace_name", help="AML workspace")
-parser.add_argument("--dataset_name_for_inference", help="dataset_name_for_inference")
 parser.add_argument("--cluster_name", help="cluster name")
-parser.add_argument("--experiment_name_for_inference", help="experiment name for inference")
 parser.add_argument("--model_name", help="model name")
 parser.add_argument("--image_analysis_type", help="image analysis type")
 
@@ -22,8 +20,6 @@ subscription_id = args.subscription_id
 resource_group = args.resource_group
 workspace_name = args.workspace_name
 cluster_name = args.cluster_name
-dataset_name_for_inference = args.dataset_name_for_inference
-experiment_name_for_inference = args.experiment_name_for_inference
 model_name = args.model_name
 image_analysis_type = args.image_analysis_type
 

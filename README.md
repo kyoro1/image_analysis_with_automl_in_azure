@@ -46,7 +46,7 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
     - **Managed identity** in [10. AML-pipeline_train](10.%20AML_pipeline_train.ipynb)
         - As usual authentication concept, you need three steps: `populate managed ID`, `give access right to the populated ID`, and `retrieve AML workspace with the ID`
         - `Populate managed ID`:
-            - In the sample impelementation, you set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration` in [10. AML_pipeline_train](./10.%20AML_pipeline_train.ipynb):
+            - In the sample impelementation, you set up as an argument `identity_type` in the method `AmlCompute.provisioning_configuration` in [10. AML_pipeline_train](./10.%20AML_pipeline_train.ipynb) and [20. AML_pipeline_inference](./20.%20AML_pipeline_inferrence.ipynb):
 
                 ```python
                 compute_config = AmlCompute.provisioning_configuration(
@@ -66,7 +66,7 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
             - After generating the identity, you need to assign the appropriate rights like `READ` or `WRITE`(IAM) in Azure AD like `Enterprise Application` setting. [This site](https://stackoverflow.com/questions/66806261/is-it-possible-to-assign-a-system-managed-identity-to-an-azure-ad-enterprise-app) can help your understanding. 
         
         - `Retrieve AML workspace with the ID`
-            - You can retrieve AML workspace as follows in [train.py](./train.py):
+            - You can retrieve AML workspace as follows in [train.py](./train.py) and [inference.py](./inference.py):
                 ```python
                 from azureml.core.authentication import MsiAuthentication
                 ## Authentication with managed identity
@@ -93,7 +93,7 @@ So, you can easily merge them by sorting out implemented Input/Output, if you pr
         )
         ```
 
-## d.3 Populating of python environment
+## d.3 Populating python environment
 - You need to prepare python environment in executing the whole pipelines, and major functions to be delopped are as follows:
     - Ingest image files labelled by AML labelling tool
     - training with those files under GPU-cluster, and fine-tune automatically
