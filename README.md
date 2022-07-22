@@ -38,7 +38,6 @@ So, you can easily merge them by sorting out implementation of Input/Output, if 
             ex.) Picture with dogs, cats and whales, but it doesn't contain any animals there.
 - Start data labelling with your image files under [the instruction](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects)
     - [Export the labed dataset into Dataset in AML](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-image-labeling-projects#export-the-labels). It will be used in training afterwards.
-    - 
 - Prepare `config.ini` under `/common` directory [with the instruction](./common/README.md)
 
 ## c.3 Populate pipelines in AML
