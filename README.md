@@ -6,7 +6,7 @@ This repository provides sample codes, which enable you to learn how to use auto
         - Please thihk about using [Custom Vision](https://www.customvision.ai/) for more simple development first.
     - You don't want to customize the algorithms for image analysis so much.
         - This repository aims at the second-best strategy for simplicity[^1], and [auto machine learning technology provided by Microsoft](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models?tabs=SDK-v2) is mainly used.
-    - You want to add the results from the deep-learning models **at batch**.
+    - You want to obtain the results from the deep-learning models **at batch**.
         - Please find some contents in [references](#reference), if you're interested in real-time inference.
 
 
