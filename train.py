@@ -2,7 +2,6 @@ import argparse
 from azureml.core import Workspace, Experiment, Dataset
 from azureml.core.authentication import MsiAuthentication
 from azureml.core.compute import AmlCompute
-
 from azureml.automl.core.shared.constants import ImageTask
 from azureml.train.automl import AutoMLImageConfig
 from azureml.train.hyperdrive import GridParameterSampling, choice
@@ -33,7 +32,7 @@ parser.add_argument("--dataset_name_for_test", help="dataset name for testing")
 parser.add_argument("--train_ratio", help="train ratio")
 parser.add_argument("--random_seed", help="random seed")
 parser.add_argument("--model_name", help="model name")
-parser.add_argument("--image_analysis_type", help="image analysis type")
+parser.add_argument("--TASK_TYPE", help="image analysis type")
 
 args = parser.parse_args()
 subscription_id = args.subscription_id
@@ -48,7 +47,7 @@ dataset_name_for_test = args.dataset_name_for_test
 train_ratio = float(args.train_ratio)
 random_seed = int(args.random_seed)
 model_name = args.model_name
-image_analysis_type = args.image_analysis_type
+TASK_TYPE = args.TASK_TYPE
 
 ## Authentication with managed identity
 msi_auth = MsiAuthentication()
@@ -86,9 +85,9 @@ ds_test_dataset = populate_tabular_dataset(workspace=ws
 
 ## Define image classification task
 task = None
-if image_analysis_type == 'image_classification':
+if TASK_TYPE == 'image-classification':
     task = ImageTask.IMAGE_CLASSIFICATION
-elif image_analysis_type == 'object_detection':
+elif TASK_TYPE == 'image-object-detection':
     task = ImageTask.IMAGE_OBJECT_DETECTION
 
 if task != None:

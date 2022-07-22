@@ -25,14 +25,14 @@ managed_id=SystemAssigned
 random_seed=1
 
 ## For Image Classification
-#image_analysis_type=image_classification
+#TASK_TYPE=image-classification
 #experiment_name=automl-image-multiclass
 #base_model=vitb16r224
 #pipelineName=image_classification_pipeline
 #model_name=image_classification_automl
 
 ## For Object Detection
-#image_analysis_type=object_detection
+#TASK_TYPE=image-object-detection
 #experiment_name=automl-object-detection
 #base_model=yolov5
 #pipelineName=object_detection_pipeline
@@ -70,7 +70,7 @@ pipelineName_for_inference=inference_pipeline
 | vm_location                   | Specify location of VM                                               |
 | managed_id                    | This id is used for authenticating in training under AML pipeline    |
 | random_seed                   | Used in splitting train/test data                                    |
-| image_analysis_type           | Select analysis type from `image_classification`, `object_detection` |
+| TASK_TYPE                     | Select analysis from `image-classification`,`image-object-detection` |
 | experiment_name               | Experiment name, a group of jobs                                     |
 | base_model                    | Base image classification model[^2]                                  |
 | pipelineName                  | Name of AML pipeline                                                 |
