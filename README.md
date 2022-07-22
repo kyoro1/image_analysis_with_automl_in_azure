@@ -29,7 +29,7 @@ So, you can easily merge them by sorting out implementation of Input/Output, if 
 - Prepare [Azure subscription](https://azure.microsoft.com/en-us/free/), and [AML workspace](https://docs.microsoft.com/en-us/azure/machine-learning/concept-workspace). You may find [the steps here](00.%20provisioning.ipynb).
 
 ## c.2 Annotate for images and prepare datasets in AML
-- Decide which image analysis will be satisfied with your demand between image classification or object detection. 
+- Decide which image analysis will be satisfied with your demand between image classification or object detection.[^0]
     ![image tasks](./docs/images/image_tasks.png) 
     - `image classification` is divided as two tasks: `multi-class` and `multi-label`.
         - `multi-class`: We can select only one class for each image, and some class must be selected.
@@ -129,6 +129,7 @@ So, you can easily merge them by sorting out implementation of Input/Output, if 
 - [Announcing Automated ML (AutoML) for Images](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-automated-ml-automl-for-images/ba-p/2843034)
 
 
+[^0]: This repository doesn't align with image segmentation.
 
 [^1]: IF you're interested in more customized algorithms, please visit https://arxiv.org/list/cs.CV/recent
 
