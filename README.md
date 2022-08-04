@@ -123,10 +123,14 @@ So, you can easily merge them by sorting out implementation of Input/Output, if 
 
 
 # Reference
-- [Training an Image Classification Multi-Class model using AutoML](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-classification-multiclass/auto-ml-image-classification-multiclass.ipynb)
-- [Reference for multi label](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-classification-multilabel/auto-ml-image-classification-multilabel.ipynb)
-- [Reference for object detection](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-object-detection/auto-ml-image-object-detection.ipynb)
-- [Announcing Automated ML (AutoML) for Images](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-automated-ml-automl-for-images/ba-p/2843034)
+- Typical use cases for image classification with AutoML in Azure
+    - These use cases have similar ways for training/inferencing. Especially, inferencing is implemented as real-time manner:
+        - [Reference for Multi-Class model](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-classification-multiclass/auto-ml-image-classification-multiclass.ipynb)
+        - [Reference for multi label](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-classification-multilabel/auto-ml-image-classification-multilabel.ipynb)
+        - [Reference for object detection](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-object-detection/auto-ml-image-object-detection.ipynb)
+    - If you're interested in batch-inferencing, please refer [this use case](https://github.com/Azure/azureml-examples/blob/main/python-sdk/tutorials/automl-with-azureml/image-classification-multiclass-batch-scoring/auto-ml-image-classification-multiclass-batch-scoring.ipynb), where it doesn't have explicit method to "predict" with given image data. By contrast, we have explicit way to predict.
+- Introduction for AutoML for images
+    - [Announcing Automated ML (AutoML) for Images](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-automated-ml-automl-for-images/ba-p/2843034)
 
 
 [^0]: This repository doesn't align with image segmentation.
